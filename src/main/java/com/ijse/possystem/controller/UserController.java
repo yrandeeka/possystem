@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.dto.UserDto;
+import com.ijse.possystem.dto.UserDto;
 import com.ijse.possystem.entity.User;
 import com.ijse.possystem.service.UserService;
 import org.springframework.web.bind.annotation.PutMapping;
