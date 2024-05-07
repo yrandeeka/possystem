@@ -27,4 +27,23 @@ public class SupplierServiceImpl implements SupplierService{
     public Supplier createSupplier(Supplier supplier){
         return supplierRepository.save(supplier);
     };
+    @Override
+    public Supplier updateCustomer(Long id, Supplier supplier){
+        Supplier existSupplier=supplierRepository.findById(id).orElse(null);
+        if (existSupplier==null) {
+            return null;
+        }
+        else{
+            existSupplier.setName(supplier.getName());
+            existSupplier.setContact_no(supplier.getContact_no());
+            existSupplier.setAddress(supplier.getAddress());
+            existSupplier.setEmail(supplier.getEmail());
+            existSupplier.setItems(supplier.getItems());
+
+            return existSupplier;
+        }
+    };
+    public void deleteCustomer(Long id){
+        supplierRepository.deleteById(id);
+    };
 }
