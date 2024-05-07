@@ -28,4 +28,25 @@ public class CustomerServiceImpl implements CustomerService {
     public Customer createCustomer(Customer customer){
         return customerRepository.save(customer);
     };
+
+    @Override
+    public Customer updateCustomer(Long id, Customer customer){
+        Customer existCustomer=customerRepository.findById(id).orElse(null);
+        if (existCustomer==null) {
+            return null;
+        }
+        else{
+            existCustomer.setFirst_name(customer.getFirst_name());
+            existCustomer.setLast_name(customer.getLast_name());
+            existCustomer.setContact_no(customer.getContact_no());
+            existCustomer.setAddress(customer.getAddress());
+            existCustomer.setEmail(customer.getEmail());
+            existCustomer.setInvoices(customer.getInvoices());
+
+            return existCustomer;
+        }
+    };
+    public void deleteCustomer(Long id){
+        customerRepository.deleteById(id);
+    };
 }
