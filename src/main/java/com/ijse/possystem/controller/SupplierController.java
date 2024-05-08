@@ -49,7 +49,7 @@ public class SupplierController {
         supplier.setContact_no(supplierDto.getContactNo());
         supplier.setAddress(supplierDto.getAddress());
         supplier.setEmail(supplierDto.getEmail());
-        supplier.setItems(supplierDto.getItems());
+        //supplier.setItems(supplierDto.getItemDtos());
 
         Supplier updateSupplier= supplierService.updateCustomer(id,supplier);
         if(updateSupplier==null){

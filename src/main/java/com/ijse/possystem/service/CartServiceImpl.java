@@ -21,4 +21,18 @@ public class CartServiceImpl implements CartService {
     public Cart createCart(Cart cart){
         return cartRepository.save(null);
     }
+    @Override
+    public Cart updateCart(Long id, Cart cart){
+        Cart existCart=cartRepository.findById(id).orElse(cart);
+        if (existCart==null) {
+            return null;
+        } else {
+            existCart.setLast_modified(cart.getLast_modified());
+            existCart.setItems(cart.getItems());
+            return cartRepository.save(existCart);
+        }
+    };
+    public void deleteCart(Long id){
+        cartRepository.deleteById(id);
+    };
 }
