@@ -5,9 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 
-import com.ijse.possystem.dto.CustomerDto;
 import com.ijse.possystem.dto.SupplierDto;
-import com.ijse.possystem.entity.Customer;
 import com.ijse.possystem.entity.Supplier;
 import com.ijse.possystem.service.SupplierService;
 
@@ -38,20 +36,38 @@ public class SupplierController {
     }
 
     @PostMapping("/suppliers")
-    public Supplier createSupplier(@RequestBody Supplier supplier) {
-        return supplierService.createSupplier(supplier);
-    }
-
-     @PutMapping("supplier/{id}")
-    public ResponseEntity<Supplier> updateSupplier(@PathVariable Long id, @RequestBody SupplierDto supplierDto) {
+    public ResponseEntity<Supplier> createSupplier(@RequestBody SupplierDto supplierDto) {
         Supplier supplier=new Supplier();
+
         supplier.setName(supplierDto.getName());
-        supplier.setContact_no(supplierDto.getContactNo());
         supplier.setAddress(supplierDto.getAddress());
         supplier.setEmail(supplierDto.getEmail());
-        //supplier.setItems(supplierDto.getItemDtos());
+        supplier.setContact_no(supplierDto.getContactNo());
+        Supplier createSupplier=supplierService.createSupplier(supplier);
+        if(createSupplier==null){
+            return ResponseEntity.status(404).build();
+        }
+        else{
+            return ResponseEntity.status(200).body(createSupplier);
+        }
+    }
 
-        Supplier updateSupplier= supplierService.updateCustomer(id,supplier);
+    @PutMapping("supplier/{id}")
+    public ResponseEntity<Supplier> updateSupplier(@PathVariable Long id, @RequestBody SupplierDto supplierDto) {
+        Supplier supplier=new Supplier();
+        Supplier updateSupplier;
+       
+        //supplier.setItems(supplierDto.getItemDtos());
+        if (!supplierDto.getName().isEmpty() || supplierDto.getContactNo()!=0) {
+            supplier.setName(supplierDto.getName());
+            supplier.setContact_no(supplierDto.getContactNo());
+            supplier.setAddress(supplierDto.getAddress());
+            supplier.setEmail(supplierDto.getEmail());
+            updateSupplier= supplierService.updateCustomer(id,supplier);
+        } else {
+            updateSupplier=null;
+        }
+            
         if(updateSupplier==null){
             return ResponseEntity.status(404).build();
         }

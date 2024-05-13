@@ -39,14 +39,16 @@ public class CategoryController {
     }
     
     @PostMapping("/categories")
-    public Category createCategory(@RequestBody Category category) {
+    public Category createCategory(@RequestBody CategoryDto categoryDto) {
+        Category category=new Category();
+        category.setDescription(categoryDto.getDescription());
         return categoryService.createCategory(category);
     }
 
     @PutMapping("category/{id}")
     public ResponseEntity<Category> updateCategory(@PathVariable Long id, @RequestBody CategoryDto categoryDto) {
         Category category=new Category();
-        category.setName(categoryDto.getName());
+        category.setDescription(categoryDto.getDescription());
         category.setItems(categoryDto.getItems());
 
         Category updateCategory=categoryService.updateCategory(id,category);

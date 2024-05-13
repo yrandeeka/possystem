@@ -27,7 +27,7 @@ public class Customer {
     private String last_name;
 
     @Column(unique = true,nullable = false)
-    private Long contact_no;
+    private int contact_no;
     
     private String address;
     

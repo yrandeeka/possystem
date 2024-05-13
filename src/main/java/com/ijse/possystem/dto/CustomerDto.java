@@ -12,7 +12,7 @@ import lombok.Setter;
 public class CustomerDto {
     private String firstName;
     private String lastName;
-    private Long contactNo;
+    private int contactNo;
     private String address;
     private String email;
     private List<Invoice> invoices;

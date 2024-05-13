@@ -30,7 +30,7 @@ public class Supplier {
     private String name;
 
     @Column(unique = true,nullable = false)
-    private long contact_no;
+    private int contact_no;
     
     private String address;
     

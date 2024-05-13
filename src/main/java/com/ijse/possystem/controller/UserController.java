@@ -38,14 +38,19 @@ public class UserController {
     @PostMapping("/users")
     public User createUser(@RequestBody UserDto userDto) {
         User user=new User();
-        user.setFirst_name(userDto.getFirstName());
-        user.setLast_name(userDto.getLastName());
-        user.setAddress(userDto.getAddress());
-        user.setEmail(userDto.getEmail());
-        user.setContact_no(userDto.getContactNo());
-        user.setUsername(userDto.getUsername());
-        user.setPassword(userDto.getPassword());
-        return userService.createUser(user);
+        if (!userDto.getFirstName().isEmpty() || !userDto.getLastName().isEmpty() || userDto.getContactNo()!=0 || 
+            !userDto.getUsername().isEmpty() || !userDto.getPassword().isEmpty()) {
+            user.setFirst_name(userDto.getFirstName());
+            user.setLast_name(userDto.getLastName());
+            user.setAddress(userDto.getAddress());
+            user.setEmail(userDto.getEmail());
+            user.setContact_no(userDto.getContactNo());
+            user.setUsername(userDto.getUsername());
+            user.setPassword(userDto.getPassword());
+            return userService.createUser(user);
+        } else {
+            return null;
+        }
     }
     
     @PutMapping("user/{id}")

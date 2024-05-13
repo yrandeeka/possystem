@@ -30,17 +30,17 @@ public class SupplierServiceImpl implements SupplierService{
     @Override
     public Supplier updateCustomer(Long id, Supplier supplier){
         Supplier existSupplier=supplierRepository.findById(id).orElse(null);
-        if (existSupplier==null) {
-            return null;
-        }
-        else{
+        System.out.println(existSupplier.getContact_no());
+        if (existSupplier!=null) {
             existSupplier.setName(supplier.getName());
             existSupplier.setContact_no(supplier.getContact_no());
             existSupplier.setAddress(supplier.getAddress());
             existSupplier.setEmail(supplier.getEmail());
             existSupplier.setItems(supplier.getItems());
-
-            return existSupplier;
+            return supplierRepository.save(existSupplier);
+        }
+        else{
+            return null;
         }
     };
     public void deleteCustomer(Long id){

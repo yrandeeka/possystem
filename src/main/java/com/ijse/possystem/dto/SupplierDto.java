@@ -2,6 +2,8 @@ package com.ijse.possystem.dto;
 
 import java.util.List;
 
+import com.ijse.possystem.entity.Item;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,8 +11,8 @@ import lombok.Setter;
 @Setter
 public class SupplierDto {
     private String name;
-    private long contactNo;
+    private int contactNo;
     private String address;
     private String email;
-    private List<ItemDto> itemDtos;
+    private List<Item> items;
 }

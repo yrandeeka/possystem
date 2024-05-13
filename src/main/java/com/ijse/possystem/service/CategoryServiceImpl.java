@@ -34,7 +34,7 @@ public class CategoryServiceImpl implements CategoryService{
         if (existCategory==null) {
             return null;
         } else {
-            existCategory.setName(category.getName());
+            existCategory.setDescription(category.getDescription());
             existCategory.setItems(category.getItems());
 
             return categoryRepository.save(existCategory);
