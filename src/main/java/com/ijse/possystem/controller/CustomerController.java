@@ -36,8 +36,19 @@ public class CustomerController {
     }
     
     @PostMapping("/customers")
-    public Customer createCustomer(@RequestBody Customer customer) {
-        return customerService.createCustomer(customer);
+    public ResponseEntity<Customer> createCustomer(@RequestBody CustomerDto customerDto) {
+        Customer customer=new Customer();
+        customer.setFirst_name(customerDto.getFirstName());
+        customer.setLast_name(customerDto.getLastName());
+        customer.setAddress(customerDto.getAddress());
+        customer.setContact_no(customerDto.getContactNo());
+        customer.setEmail(customerDto.getEmail());
+        Customer createCustomer=customerService.createCustomer(customer);
+        if (createCustomer==null) {
+            return ResponseEntity.status(404).build();
+        } else {
+            return ResponseEntity.status(200).body(createCustomer);
+        }
     }
 
     @PutMapping("customer/{id}")
