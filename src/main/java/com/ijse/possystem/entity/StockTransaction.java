@@ -11,6 +11,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -40,12 +42,14 @@ public class StockTransaction {
     private Double quantity;
     private String remarks;
 
-    @ManyToMany
-    @JoinTable(
-        name = "stock_transaction_item",
-        joinColumns=@JoinColumn(name = "stock_transaction_id"),
-        inverseJoinColumns = @JoinColumn(name="item_id")
-    )
-    private List<Item> items;
-
+    // @ManyToMany
+    // @JoinTable(
+    //     name = "stock_transaction_item",
+    //     joinColumns=@JoinColumn(name = "stock_transaction_id"),
+    //     inverseJoinColumns = @JoinColumn(name="item_id")
+    // )
+    // private List<Item> items;
+    @ManyToOne
+    @JoinColumn(name="item_id")
+    private Item item;
 }

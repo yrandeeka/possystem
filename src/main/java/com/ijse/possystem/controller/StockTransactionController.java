@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 
 @RestController
@@ -34,16 +32,16 @@ public class StockTransactionController {
         return stockTransactionService.getStockTransactionById(id);
     }
 
-    @PostMapping("/stocktransactions")
-    public StockTransaction createStockTransaction(@RequestBody StockTransactionDto stockTransactionDto) {
-        StockTransaction stockTransaction=new StockTransaction();
-        stockTransaction.setQuantity(stockTransactionDto.getQuantity());
-        stockTransaction.setTransactionDate(stockTransaction.getTransactionDate());
-        stockTransaction.setTransactionType(stockTransactionDto.getTransactionType());
-        stockTransaction.setUnits(stockTransactionDto.getUnits());
-        stockTransaction.setRemarks(stockTransactionDto.getRemarks());
-        stockTransaction.setItems(stockTransaction.getItems());
-        return stockTransactionService.createStockTransaction(stockTransaction);
-    }
+    // @PostMapping("/stocktransactions")
+    // public StockTransaction createStockTransaction(@RequestBody StockTransactionDto stockTransactionDto) {
+    //     StockTransaction stockTransaction=new StockTransaction();
+    //     stockTransaction.setQuantity(stockTransactionDto.getQuantity());
+    //     stockTransaction.setTransactionDate(stockTransaction.getTransactionDate());
+    //     stockTransaction.setTransactionType(stockTransactionDto.getTransactionType());
+    //     stockTransaction.setUnits(stockTransactionDto.getUnits());
+    //     stockTransaction.setRemarks(stockTransactionDto.getRemarks());
+    //     stockTransaction.setItems(stockTransaction.);
+    //     return stockTransactionService.createStockTransaction(stockTransaction);
+    // }
     
 }

@@ -2,6 +2,10 @@ package com.ijse.possystem.dto;
 
 import java.util.List;
 
+import com.ijse.possystem.entity.Cart;
+import com.ijse.possystem.entity.Invoice;
+import com.ijse.possystem.entity.StockTransaction;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,10 +15,11 @@ public class ItemDto {
     private String name;
     private String units;
     private Double quantity;
-    private Double price;
+    private Double unitPrice;
+    private String remarks;
     private CategoryDto categoryDto;
-    private List<SupplierDto> supplierDtos;
-    private List<StockTransactionDto> stockTranscactionDtos;
-    private List<InvoiceDto> invoiceDtos;
-    private List<CartDto> cartDtos;
+    private SupplierDto supplierDto;
+    private List<StockTransaction> stockTranscactions;
+    private List<Invoice> invoices;
+    private List<Cart> carts;
 }

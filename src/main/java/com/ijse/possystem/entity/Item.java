@@ -13,6 +13,7 @@ import jakarta.persistence.JoinColumns;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,22 +33,25 @@ public class Item {
     private String name;
     private String units;
     private Double quantity;
-    private Double price;
+    private Double unitPrice;
 
     @ManyToOne
     @JoinColumn(name = "category_id",nullable = false)
     private Category category;
 
-    @ManyToMany
-    @JoinTable(
-        name="item_supplier",
-        joinColumns=@JoinColumn(name = "item_id"),
-        inverseJoinColumns = @JoinColumn(name="supplier_id")
-    )
-    private List<Supplier> suppliers;
+    // @ManyToMany
+    // @JoinTable(
+    //     name="item_supplier",
+    //     joinColumns=@JoinColumn(name = "item_id"),
+    //     inverseJoinColumns = @JoinColumn(name="supplier_id")
+    // )
+    // private List<Supplier> suppliers;
+    @ManyToOne
+    @JoinColumn(name="supplier_id")
+    private Supplier supplier;
 
     @JsonIgnore
-    @ManyToMany(mappedBy = "items")
+    @OneToMany(mappedBy = "item")
     private List<StockTransaction> stockTransactions;
 
     @JsonIgnore

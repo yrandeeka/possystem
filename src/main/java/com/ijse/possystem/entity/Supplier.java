@@ -10,6 +10,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -38,6 +39,6 @@ public class Supplier {
     private String email;
     
     @JsonIgnore
-    @ManyToMany(mappedBy = "suppliers")
+    @OneToMany(mappedBy = "supplier")
     private List<Item> items;
 }
