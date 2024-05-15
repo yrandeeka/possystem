@@ -64,13 +64,10 @@ public class ItemController {
             item.setUnits(itemDto.getUnits());
             item.setSupplier(item.getSupplier());
             item.setUnitPrice(item.getUnitPrice());
-            Item createItem=itemService.createItem(item);
-        
-            stockTransaction.setItem(createItem);
+            
+            Item createItem=itemService.createItem(item, stockTransaction);
 
-            StockTransaction createStockTransaction=stockTransactionService.createStockTransaction(stockTransaction);
-
-            if (createStockTransaction==null) {
+            if (createItem==null) {
                 return ResponseEntity.status(404).build();
             } else {
                 return ResponseEntity.status(200).body(createItem);
