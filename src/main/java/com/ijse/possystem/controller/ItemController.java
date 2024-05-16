@@ -1,5 +1,6 @@
 package com.ijse.possystem.controller;
 
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
@@ -14,6 +15,8 @@ import com.ijse.possystem.entity.StockTransaction;
 import com.ijse.possystem.service.ItemService;
 import com.ijse.possystem.service.StockTransactionService;
 
+import lombok.extern.log4j.Log4j2;
+
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,13 +26,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 @CrossOrigin(origins = "*")
+@Log4j2
 public class ItemController {
     
     @Autowired
     private ItemService itemService;
-
-    @Autowired
-    private StockTransactionService stockTransactionService;
 
     @GetMapping("/items")
     public List<Item> getAllItems() {
@@ -41,17 +42,16 @@ public class ItemController {
         return itemService.getItemById(id);
     }
     
-    
-    @Transactional
     @PostMapping("/items")
     public ResponseEntity<Item> createItems(@RequestBody ItemDto itemDto) {
-        System.out.println("supplierDto"+itemDto.getSupplierDto());
+
+        //System.out.println("itemDto-"+itemDto.getName());
+        log.info("ItemDto {}", itemDto.getName());
+
         try {
             StockTransaction stockTransaction=new StockTransaction();
-
-            Date date=new Date();
-            stockTransaction.setTransactionDate(date.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime());
-            System.out.println("date-"+stockTransaction.getTransactionDate());
+            stockTransaction.setTransactionDate(LocalDateTime.now());
+            log.info("date-{}",stockTransaction.getTransactionDate());
             stockTransaction.setTransactionType("Purchase");
             stockTransaction.setUnits(itemDto.getUnits());
             stockTransaction.setQuantity(itemDto.getQuantity());
@@ -60,10 +60,10 @@ public class ItemController {
             Item item=new Item();
             item.setName(itemDto.getName());
             item.setQuantity(itemDto.getQuantity());
-            item.setCategory(item.getCategory());
+            item.setCategory(itemDto.getCategory());
             item.setUnits(itemDto.getUnits());
-            item.setSupplier(item.getSupplier());
-            item.setUnitPrice(item.getUnitPrice());
+            item.setSupplier(itemDto.getSupplier());
+            item.setUnitPrice(itemDto.getUnitPrice());
             
             Item createItem=itemService.createItem(item, stockTransaction);
 
@@ -73,6 +73,8 @@ public class ItemController {
                 return ResponseEntity.status(200).body(createItem);
             }
         } catch (Exception e) {
+            log.error(e.getMessage());
+            log.error(e.getStackTrace());
             return ResponseEntity.status(500).build();
         }
         

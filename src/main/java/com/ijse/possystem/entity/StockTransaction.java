@@ -27,7 +27,7 @@ public class StockTransaction {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Column(nullable = false)
     private LocalDateTime transactionDate;
@@ -40,6 +40,7 @@ public class StockTransaction {
     
     @Column(nullable = false)
     private Double quantity;
+    
     private String remarks;
 
     // @ManyToMany

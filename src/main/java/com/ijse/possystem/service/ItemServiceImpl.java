@@ -1,5 +1,6 @@
 package com.ijse.possystem.service;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,15 +30,17 @@ public class ItemServiceImpl implements ItemService {
     public Item getItemById(Long id){
         return itemRepository.findById(id).orElse(null);
     };
-    
-    @Override
+
     @Transactional
+    @Override
     public Item createItem(Item item,StockTransaction stockTransaction){
+        
         try {
             Item createItem=itemRepository.save(item);
             stockTransaction.setItem(createItem);
+            System.out.println("createItem"+createItem.getId());
             stockTransactionRepository.save(stockTransaction);
-            return itemRepository.save(item);    
+            return createItem;    
         } catch (Exception e) {
             return null;
         }

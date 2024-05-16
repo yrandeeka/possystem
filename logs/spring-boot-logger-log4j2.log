@@ -1,0 +1,21 @@
+2024-05-16 22:43:44,344 INFO o.s.t.c.s.AnnotationConfigContextLoaderUtils [main] Could not detect default configuration classes for test class [com.ijse.possystem.PossystemApplicationTests]: PossystemApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2024-05-16 22:43:44,516 INFO o.s.b.t.c.SpringBootTestContextBootstrapper [main] Found @SpringBootConfiguration com.ijse.possystem.PossystemApplication for test class com.ijse.possystem.PossystemApplicationTests
+2024-05-16 22:43:45,110 INFO o.s.b.StartupInfoLogger [main] Starting PossystemApplicationTests using Java 17.0.8 with PID 9752 (started by Yasas Randeeka in D:\CMJD\Course Works\Coursework 3\without spring security\possystem\possystem)
+2024-05-16 22:43:45,122 INFO o.s.b.SpringApplication [main] No active profile set, falling back to 1 default profile: "default"
+2024-05-16 22:43:46,235 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-05-16 22:43:46,357 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 112 ms. Found 8 JPA repository interfaces.
+2024-05-16 22:43:46,946 INFO o.h.j.i.u.LogHelper [main] HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-05-16 22:43:47,022 INFO o.h.Version [main] HHH000412: Hibernate ORM core version 6.4.4.Final
+2024-05-16 22:43:47,084 INFO o.h.c.i.RegionFactoryInitiator [main] HHH000026: Second-level cache disabled
+2024-05-16 22:43:47,500 INFO o.s.o.j.p.SpringPersistenceUnitInfo [main] No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-05-16 22:43:47,567 INFO c.z.h.HikariDataSource [main] HikariPool-1 - Starting...
+2024-05-16 22:43:47,576 WARN c.z.h.u.DriverDataSource [main] Registered driver with driverClassName=com.mysql.jdbc.Driver was not found, trying direct instantiation.
+2024-05-16 22:43:48,249 INFO c.z.h.p.HikariPool [main] HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@77eb607e
+2024-05-16 22:43:48,253 INFO c.z.h.HikariDataSource [main] HikariPool-1 - Start completed.
+2024-05-16 22:43:50,195 INFO o.h.e.t.j.p.i.JtaPlatformInitiator [main] HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-05-16 22:43:50,368 INFO o.s.o.j.AbstractEntityManagerFactoryBean [main] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-05-16 22:43:51,130 WARN o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration [main] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-05-16 22:43:51,734 INFO o.s.b.StartupInfoLogger [main] Started PossystemApplicationTests in 6.942 seconds (process running for 9.071)
+2024-05-16 22:43:52,549 INFO o.s.o.j.AbstractEntityManagerFactoryBean [SpringApplicationShutdownHook] Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-05-16 22:43:52,553 INFO c.z.h.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown initiated...
+2024-05-16 22:43:52,570 INFO c.z.h.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown completed.
