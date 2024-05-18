@@ -2,6 +2,8 @@ package com.ijse.possystem.entity;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -26,6 +28,7 @@ public class Category {
     @Column(unique = true)
     private String description; 
 
+    @JsonIgnore
     @OneToMany(mappedBy = "category")
     private List<Item> items;
     

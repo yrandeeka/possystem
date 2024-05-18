@@ -19,10 +19,10 @@ public class ItemDto {
     private Double quantity;
     private Double unitPrice;
     private String remarks;
+    private String status;
     private Category category;
     private Supplier supplier;
     private List<StockTransaction> stockTranscactions;
     private List<Invoice> invoices;
     private List<Cart> carts;
-
 }

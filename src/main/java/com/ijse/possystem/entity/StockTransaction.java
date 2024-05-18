@@ -37,6 +37,9 @@ public class StockTransaction {
 
     @Column(nullable = false)
     private String units;
+
+    @Column(nullable = false)
+    private Double totalPrice;
     
     @Column(nullable = false)
     private Double quantity;

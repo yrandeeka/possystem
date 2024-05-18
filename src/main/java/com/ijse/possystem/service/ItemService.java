@@ -11,4 +11,6 @@ public interface ItemService {
     List<Item> getAllItems();
     Item getItemById(Long id);
     Item createItem(Item item,StockTransaction stockTransaction);
+    Item updateItem(Item item,StockTransaction stockTransaction);
+    Item changeItemStatus(Long id,Item item);
 }

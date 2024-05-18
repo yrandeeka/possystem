@@ -34,6 +34,7 @@ public class Item {
     private String units;
     private Double quantity;
     private Double unitPrice;
+    private String status;
 
     @ManyToOne
     @JoinColumn(name = "category_id",nullable = false)
@@ -45,7 +46,7 @@ public class Item {
     //     joinColumns=@JoinColumn(name = "item_id"),
     //     inverseJoinColumns = @JoinColumn(name="supplier_id")
     // )
-    // private List<Supplier> suppliers;
+    // private List<Supplier> suppliers
     @ManyToOne
     @JoinColumn(name="supplier_id")
     private Supplier supplier;
