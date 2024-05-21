@@ -1,11 +1,20 @@
 package com.ijse.possystem.controller;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 
 import com.ijse.possystem.dto.CartDto;
 import com.ijse.possystem.entity.Cart;
+import com.ijse.possystem.entity.CartItem;
+import com.ijse.possystem.entity.Item;
+import com.ijse.possystem.entity.StockTransaction;
+import com.ijse.possystem.service.CartItemService;
 import com.ijse.possystem.service.CartService;
+import com.ijse.possystem.service.ItemService;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -23,6 +32,10 @@ public class CartController {
 
     @Autowired
     private CartService cartService;
+    @Autowired
+    private ItemService itemService;
+    @Autowired
+    private CartItemService cartItemService;
 
     @GetMapping("/cart/{id}")
     public Cart getCartById(@PathVariable Long id){
@@ -31,12 +44,21 @@ public class CartController {
 
     @PostMapping("/carts")
     public ResponseEntity<Cart> createCartById(@RequestBody CartDto cartDto){
+        List<CartItem> cartItems=new ArrayList<>();
+        //cartItem.set
+
         Cart cart=new Cart();
-        cart.setLast_modified(cartDto.getLastModified());
+        cart.setLast_modified(LocalDateTime.now());
         cart.setUser(cartDto.getUser());
-        cart.setItems(cartDto.getItems());
         Cart createCart=cartService.createCart(cart);
-        if (createCart==null) {
+
+        for (CartItem cartThing : cartDto.getAddItems()) {
+            Item existItem=itemService.getItemById(cartThing.getId());
+            CartItem createCartItem=cartItemService.createCartItem(cartThing.getCartQty(),createCart, existItem);
+            cartItems.add(createCartItem);
+        }
+
+        if (cartItems.size()!=cartDto.getAddItems().size()) {
             return ResponseEntity.status(500).build();
         } else {
             return ResponseEntity.status(200).body(createCart);
@@ -46,8 +68,7 @@ public class CartController {
     @PutMapping("carts/{id}")
     public ResponseEntity<Cart> updateCart(@PathVariable Long id, @RequestBody CartDto cartDto) {
         Cart cart=new Cart();
-        cart.setLast_modified(cartDto.getLastModified());
-        cart.setItems(cartDto.getItems());
+        cart.setLast_modified(LocalDateTime.now());
         Cart updateCart=cartService.updateCart(id,cart);
         if(updateCart==null){
             return ResponseEntity.status(404).build();

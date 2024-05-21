@@ -3,15 +3,16 @@ package com.ijse.possystem.entity;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -34,12 +35,8 @@ public class Cart {
     @OneToOne
     @JoinColumn(name = "user_id",referencedColumnName = "id")
     private User user;
+ 
+    @OneToMany(mappedBy="cart")
+    private List<CartItem> cartItems;
 
-    @ManyToMany
-    @JoinTable(
-        name = "cart_item",
-        joinColumns = @JoinColumn(name="cart_id"),
-        inverseJoinColumns = @JoinColumn(name="item_id")
-    )
-    private List<Item> items;
 }

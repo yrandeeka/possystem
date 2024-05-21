@@ -59,7 +59,7 @@ public class Item {
     @ManyToMany(mappedBy = "items")
     private List<Invoice> invoices;
 
-    @JsonIgnore
-    @ManyToMany(mappedBy = "items")
-    private List<Cart> carts;
+    @OneToMany(mappedBy = "item")
+    private List<CartItem> cartItems;
+
 }

@@ -61,11 +61,12 @@ public class ItemController {
             Item item=new Item();
             item.setName(itemDto.getName());
             item.setQuantity(itemDto.getQuantity());
-            item.setCategory(itemDto.getCategory());
+            item.setCategory(itemDto.getCategory());    
             item.setUnits(itemDto.getUnits());
             item.setSupplier(itemDto.getSupplier());
             item.setUnitPrice(itemDto.getUnitPrice());
-            
+            item.setStatus("stock in");
+
             Item createItem=itemService.createItem(item, stockTransaction);
 
             if (createItem==null) {

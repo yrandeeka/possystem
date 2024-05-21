@@ -19,7 +19,7 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public Cart createCart(Cart cart){
-        return cartRepository.save(null);
+        return cartRepository.save(cart);
     }
     @Override
     public Cart updateCart(Long id, Cart cart){
@@ -28,7 +28,6 @@ public class CartServiceImpl implements CartService {
             return null;
         } else {
             existCart.setLast_modified(cart.getLast_modified());
-            existCart.setItems(cart.getItems());
             return cartRepository.save(existCart);
         }
     };
