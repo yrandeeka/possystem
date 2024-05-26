@@ -1,10 +1,15 @@
 package com.ijse.possystem.entity;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -36,6 +41,12 @@ public class User {
     @Column(unique = true)
     private String email;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "user")
-    private Cart cart;  
+    private Cart cart;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "user")
+    private List<Invoice> invoices;
+     
 }

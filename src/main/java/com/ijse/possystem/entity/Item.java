@@ -56,9 +56,10 @@ public class Item {
     private List<StockTransaction> stockTransactions;
 
     @JsonIgnore
-    @ManyToMany(mappedBy = "items")
-    private List<Invoice> invoices;
-
+    @OneToMany(mappedBy="item")/* newly added */
+    private List<InvoiceItem> invoiceItems;
+    
+    @JsonIgnore
     @OneToMany(mappedBy = "item")
     private List<CartItem> cartItems;
 

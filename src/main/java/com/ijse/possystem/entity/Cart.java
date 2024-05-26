@@ -32,11 +32,14 @@ public class Cart {
     @Column(nullable = false)
     private LocalDateTime last_modified;
 
+    @Column(nullable = false)
+    private String status;
+
     @OneToOne
     @JoinColumn(name = "user_id",referencedColumnName = "id")
     private User user;
- 
+    
+    @JsonIgnore
     @OneToMany(mappedBy="cart")
     private List<CartItem> cartItems;
-
 }

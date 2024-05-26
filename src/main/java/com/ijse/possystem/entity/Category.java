@@ -31,7 +31,4 @@ public class Category {
     @JsonIgnore
     @OneToMany(mappedBy = "category")
     private List<Item> items;
-
-    
-    
 }
