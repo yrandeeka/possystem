@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,10 +13,12 @@ import com.ijse.possystem.entity.Cart;
 import com.ijse.possystem.entity.CartItem;
 import com.ijse.possystem.entity.Invoice;
 import com.ijse.possystem.entity.InvoiceItem;
+import com.ijse.possystem.entity.Item;
 import com.ijse.possystem.repository.CartItemRepository;
 import com.ijse.possystem.repository.CartRepository;
 import com.ijse.possystem.repository.InvoiceItemRepository;
 import com.ijse.possystem.repository.InvoiceRepository;
+import com.ijse.possystem.repository.ItemRepository;
 
 @Service
 public class InvoiceServiceImpl implements InvoiceService{
@@ -31,6 +34,9 @@ public class InvoiceServiceImpl implements InvoiceService{
 
     @Autowired
     private CartItemRepository cartItemRepository;
+
+    @Autowired
+    private ItemRepository itemRepository;
 
     @Override
     public List<Invoice> getAllInvoices(){
@@ -69,7 +75,12 @@ public class InvoiceServiceImpl implements InvoiceService{
                 invoiceItem.setItem(cartItem.getItem());
                 invoiceItem.setInvoice(createInvoice);
 
-                invoiceItemRepository.save(invoiceItem);
+                InvoiceItem createInvoiceItem=invoiceItemRepository.save(invoiceItem);
+
+                Item existItem=itemRepository.findById(createInvoiceItem.getItem().getId()).orElse(null);
+
+                existItem.setQuantity(existItem.getQuantity()-createInvoiceItem.getPurchaseQty());
+                itemRepository.save(existItem);
 
                 CartItem existCartItem=cartItemRepository.findById(cartItem.getId()).orElse(null);
                 existCartItem.setStatus("deactive");
