@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ijse.possystem.dto.UserDto;
 import com.ijse.possystem.entity.User;
+import com.ijse.possystem.security.WebSecurityConfig;
 import com.ijse.possystem.service.UserService;
 import org.springframework.web.bind.annotation.PutMapping;
 
@@ -24,6 +26,9 @@ public class UserController {
     
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
     
     @GetMapping("/users")
     public List<User> getAllUsers() {
@@ -46,7 +51,7 @@ public class UserController {
             user.setEmail(userDto.getEmail());
             user.setContact_no(userDto.getContactNo());
             user.setUsername(userDto.getUsername());
-            user.setPassword(userDto.getPassword());
+            user.setPassword(passwordEncoder.encode(userDto.getPassword()));
             return userService.createUser(user);
         } else {
             return null;
@@ -63,7 +68,7 @@ public class UserController {
         user.setContact_no(userDto.getContactNo());
         user.setUsername(userDto.getUsername());
         if (userDto.getPassword()!=null) {
-            user.setPassword(userDto.getPassword());
+            user.setPassword(passwordEncoder.encode(userDto.getPassword()));
         }
         User updateUser=userService.updateUser(id, user);
         if(updateUser==null){

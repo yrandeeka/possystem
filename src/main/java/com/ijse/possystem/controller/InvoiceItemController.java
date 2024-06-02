@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 @CrossOrigin(origins = "*")
 public class InvoiceItemController {
     
-
     @GetMapping("/invoiceItems/{id}")
     public String getInvoiceItemsByInvoiceId(@PathVariable Long id) {
         return new String();

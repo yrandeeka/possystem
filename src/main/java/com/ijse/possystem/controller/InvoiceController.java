@@ -35,10 +35,6 @@ public class InvoiceController {
     @PostMapping("/invoice")
     public Invoice createInvoice(@RequestBody InvoiceDto invoiceDto) {
         return invoiceService.createInvoice(invoiceDto);
-    }
-    
-
-
-    
+    } 
     
 }

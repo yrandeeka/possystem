@@ -27,7 +27,7 @@ public class StockTransactionController {
         return stockTransactionService.getAllStockTransactions();
     }
 
-    @GetMapping("/stocktransactions/{id}")
+    @GetMapping("/stocktransaction/{id}")
     public StockTransaction getStockTransaction(@PathVariable Long id) {
         return stockTransactionService.getStockTransactionById(id);
     }
