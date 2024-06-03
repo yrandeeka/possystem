@@ -24,7 +24,7 @@ import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;
 
-@Configuration
+@Configuration  
 public class JwtUtils {
 
     /*yr */
@@ -48,20 +48,17 @@ public class JwtUtils {
     //@PostConstruct/*yr annotation */
     private Key key(){
         Key key=Keys.hmacShaKeyFor(Decoders.BASE64.decode(secret)); //generate key with secret
-        System.out.println("key->"+key);
+        System.out.println("key->"+key.getEncoded());
         return key;
     }
 
     public String generateJwtToken(Authentication authentication){
-
-        
-
         UserDetails userDetails=(UserDetails)authentication.getPrincipal();
         return Jwts.builder()
         .setSubject(userDetails.getUsername())
         .setIssuedAt(new Date())
         .setExpiration(new Date(new Date().getTime()+1000*60*60*24))
-        .signWith(key(),SignatureAlgorithm.ES256)
+        .signWith(key(),SignatureAlgorithm.HS256)
         .compact();
     }
 
