@@ -11,4 +11,5 @@ public interface StockTransactionService {
     List<StockTransaction> getAllStockTransactions();
     StockTransaction getStockTransactionById(Long id);
     StockTransaction createStockTransaction(StockTransaction stockTransaction);
+    StockTransaction getLatestStockTransaction();
 }

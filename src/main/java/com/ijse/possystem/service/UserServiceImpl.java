@@ -26,6 +26,11 @@ public class UserServiceImpl implements UserService{
     public User createUser(User user){
         return userRepository.save(user);
     };
+
+    public User findByUsername(String username){
+        User existUser=userRepository.findByUsername(username).orElse(null);
+        return existUser;
+    };
     @Override
     public User updateUser(Long id,User user){
         User exitUser=userRepository.findById(id).orElse(null);

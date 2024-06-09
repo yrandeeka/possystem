@@ -28,4 +28,11 @@ public class StockTransactionServiceImpl implements StockTransactionService {
     public StockTransaction createStockTransaction(StockTransaction stockTransaction){
         return stockTransactionRepository.save(stockTransaction);
     };
+
+    @Override
+    public StockTransaction getLatestStockTransaction(){
+        StockTransaction lat_stockTransaction=stockTransactionRepository
+                    .testFindTopByOrderByLastUpdatedDesc().orElse(null);
+        return lat_stockTransaction;
+    };
 }

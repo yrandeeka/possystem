@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -97,5 +96,11 @@ public class InvoiceServiceImpl implements InvoiceService{
         } catch (Exception e) {
             return null;
         }
+    };
+
+    @Override
+    public Invoice getLatestInvoice(){
+        Invoice lat_invoice=invoiceRepository.testFindTopByOrderByLastUpdatedDesc().orElse(null);
+        return lat_invoice;
     };
 }

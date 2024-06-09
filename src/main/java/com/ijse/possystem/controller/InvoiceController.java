@@ -37,4 +37,9 @@ public class InvoiceController {
         return invoiceService.createInvoice(invoiceDto);
     } 
     
+    @GetMapping("/latest_invoice")
+    public Invoice getLatestInvoice() {
+        return invoiceService.getLatestInvoice();
+    }
+    
 }

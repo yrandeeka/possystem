@@ -13,4 +13,5 @@ public interface InvoiceService {
     List<Invoice> getAllInvoices();
     Invoice getInvoiceById(Long id);
     Invoice createInvoice(InvoiceDto invoiceDto);
+    Invoice getLatestInvoice();
 }
